@@ -2,6 +2,8 @@
 #include "hardware/i2c.h"
 #include <string.h>
 
+#define count_of(a) (sizeof(a) / sizeof((a)[0]))
+
 // commands
 #define HT16K33_SYSTEM_STANDBY 0x20
 #define HT16K33_SYSTEM_RUN 0x21
@@ -113,9 +115,9 @@ void display_clear(void)
     memset(display_buffer, 0, sizeof(display_buffer));
 }
 
-void display_set_buffer(const uint8_t *buffer, int len)
+void display_set_buffer(const uint8_t *buffer)
 {
-    if (buffer && len >= 5)
+    if (buffer != NULL)
     {
         memcpy(display_buffer, buffer, 5);
         display_write();

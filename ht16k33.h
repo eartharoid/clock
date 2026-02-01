@@ -67,7 +67,7 @@ void display_clear(void);
  * @param buffer Pointer to 5-byte buffer with raw segment patterns
  * @param len Should be 5 (for safety)
  */
-void display_set_buffer(const uint8_t *buffer, int len);
+void display_set_buffer(const uint8_t *buffer);
 
 /**
  * Get pointer to the internal display buffer for direct manipulation.
