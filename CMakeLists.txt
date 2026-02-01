@@ -35,7 +35,10 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(clock clock.c )
+add_executable(clock 
+    clock.c 
+    ht16k33.c
+)
 
 pico_set_program_name(clock "clock")
 pico_set_program_version(clock "0.1")
