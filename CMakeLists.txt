@@ -59,6 +59,7 @@ target_include_directories(clock PRIVATE
 # Add any user requested libraries
 target_link_libraries(clock 
         hardware_i2c
+        hardware_rtc
         )
 
 pico_add_extra_outputs(clock)
