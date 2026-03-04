@@ -52,6 +52,8 @@ send_time
 
 # --- 2. Listen for PipeWire volume changes ---
 (
+
+    last_vol_str=""
     # pactl subscribe hooks into the PipeWire-Pulse event bus seamlessly
     stdbuf -oL pactl subscribe | \
     grep --line-buffered "Event 'change' on sink" | \
@@ -65,7 +67,12 @@ send_time
         
         # Format to VNNN (zero-padded to 3 digits)
         vol_str=$(printf "V%03d" "$vol_int")
-        send_to_serial "$vol_str"
+
+        # ONLY send to serial if the volume actually changed
+        if [ "$vol_str" != "$last_vol_str" ]; then
+            send_to_serial "$vol_str"
+            last_vol_str="$vol_str" # Update the tracker
+        fi
     done
 ) &
 
